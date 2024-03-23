@@ -4,6 +4,8 @@ import br.gov.caixa.conta.enumeradores.Status;
 
 import java.util.Date;
 
+//transformar essa classe em abstract
+
 public class Cliente {
     private String id;
     private String classificacao;
