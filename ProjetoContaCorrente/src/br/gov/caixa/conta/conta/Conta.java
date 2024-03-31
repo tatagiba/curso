@@ -1,9 +1,13 @@
 package br.gov.caixa.conta.conta;
 
+import br.gov.caixa.conta.enumeradores.Acao;
 import br.gov.caixa.conta.enumeradores.Status;
 import br.gov.caixa.conta.enumeradores.TipoCliente;
+import br.gov.caixa.conta.historico.HistoricoAcao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Conta {
     private String id;
@@ -13,6 +17,9 @@ public class Conta {
     private Status status;
     private String idUsuario;
     protected TipoCliente tipo;
+
+    private List<HistoricoAcao> historicoAcoes = new ArrayList<>();
+
 
     Conta(String id, String idUsu,TipoCliente tipo){
         this.id = id;
@@ -26,12 +33,17 @@ public class Conta {
     }
 
     public boolean sacar(double valor){
-        double saqueTarifa = (valor * 0.05);
+        boolean retorno;
+        double valorReal = valor;
         if(this.tipo == TipoCliente.PESSOA_JURIDICA){
-           return this.efetivarSaque(valor + saqueTarifa);
-        }
-        return this.efetivarSaque(valor);
+            valorReal = valor + calculaTarifa(valor);
+            retorno =  this.efetivarSaque(valorReal);
 
+        }
+        retorno = this.efetivarSaque(valor);
+
+        historicoAcoes.add(new HistoricoAcao(Acao.SAQUE,valor, valorReal, idUsuario,"", retorno));
+        return retorno;
     }
     private boolean efetivarSaque(double valor){
         if (valor > this.saldo)
@@ -41,6 +53,10 @@ public class Conta {
             return true;
         }
 
+    }
+
+    private double calculaTarifa(double valor){
+        return valor * 0.05;
     }
     public void depositar(double valor){
         this.saldo = this.saldo + valor;
