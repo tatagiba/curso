@@ -6,7 +6,7 @@ import java.util.Date;
 
 //transformar essa classe em abstract
 
-public class Cliente {
+public abstract class Cliente {
     private String id;
     private String classificacao;
     private String nome;
@@ -15,7 +15,6 @@ public class Cliente {
 
     Cliente(String id, String classificacao, String nome, Date data, Status st){
         this.id = id;
-        this.classificacao = classificacao;
         this.nome = nome;
         this.dataCadastro = data;
         this.status = st;

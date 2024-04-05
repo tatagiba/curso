@@ -6,7 +6,7 @@ import br.gov.caixa.conta.conta.ContaCorrente;
 
 import java.util.Date;
 
-public class ClientePJ extends Cliente{
+public final class ClientePJ extends Cliente{
 
     ClientePJ(String id, String classificacao, String nome){
         super(id, classificacao, nome, new Date(), Status.ATIVO);
