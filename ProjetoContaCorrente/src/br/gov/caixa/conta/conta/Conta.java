@@ -20,7 +20,7 @@ public abstract class Conta {
     private List<HistoricoAcao> historicoAcoes = new ArrayList<>();
 
 
-    Conta(String id, String idUsu,TipoCliente tipo){
+    public Conta(String id, String idUsu,TipoCliente tipo){
         this.id = id;
         this.saldo = 0.00;
         this.historico = new Date();

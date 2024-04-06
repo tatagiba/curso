@@ -10,7 +10,7 @@ public class ConsultarSaldo implements br.gov.caixa.conta.interfaces.ConsultarSa
     @Override
     public Double executar(Conta conta) {
         conta.setHistorico(new HistoricoAcao(new Date(), Acao.CONSULTA,
-                conta.getSaldo(), conta.getSaldo(),"usuario","usuario","",true));
+                conta.getSaldo(), conta.getSaldo(), conta.getIdUsuario(), conta.getIdUsuario(),"",true));
         return conta.getSaldo();
     }
 }

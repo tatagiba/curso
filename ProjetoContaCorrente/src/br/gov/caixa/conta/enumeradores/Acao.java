@@ -5,5 +5,6 @@ public enum Acao {
     DEPOSITO,
     TRANSFERENCIA,
     INVESTIMENTO,
-    CONSULTA
+    CONSULTA,
+    CREDITO_RENDIMENTO
 }
