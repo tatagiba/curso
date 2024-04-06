@@ -2,6 +2,7 @@ package br.gov.caixa.conta.cliente;
 
 import br.gov.caixa.conta.conta.ContaInvestimento;
 import br.gov.caixa.conta.conta.pessoafisica.ContaCorrentePF;
+import br.gov.caixa.conta.conta.pessoafisica.ContaInvestimentoPF;
 import br.gov.caixa.conta.conta.pessoafisica.ContaPoupanca;
 import br.gov.caixa.conta.enumeradores.Status;
 import br.gov.caixa.conta.enumeradores.TipoCliente;
@@ -20,6 +21,7 @@ public final class ClientePF extends Cliente{
         super(id, classificacao, nome, new Date(), Status.ATIVO);
 
         contaPf = new ContaCorrentePF("1", id);
-
+        investimentoPF = new ContaInvestimentoPF("1",id);
+        poupanca = new ContaPoupanca("1", id);
     }
 }

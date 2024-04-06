@@ -19,26 +19,20 @@ import static br.gov.caixa.conta.constantes.Constantes.TARIFA_SAQUE_PJ;
 
 public class Sacar implements br.gov.caixa.conta.interfaces.Sacar {
 
-    public Boolean executar(Double valor, ContaCorrentePF conta) {
-        return executar(valor, conta,TARIFA_SAQUE_PF);
-    }
-    public Boolean executar(Double valor, ContaInvestimentoPF conta) {
-        return executar(valor, conta,TARIFA_SAQUE_PF);
-    }
-    public Boolean executar(Double valor, ContaPoupanca conta) {
+    public Boolean executar(Double valor, Conta conta) {
         return executar(valor, conta,TARIFA_SAQUE_PF);
     }
 
     public Boolean executar(Double valor, ContaCorrentePJ conta) {
         return executar(valor, conta,TARIFA_SAQUE_PJ);
     }
-    public Boolean executar(Double valor, ContaInvestimentoPJ conta) {
-        return executar(valor, conta,TARIFA_SAQUE_PJ);
-    }
-
 
     @Override
     public Boolean executar(Double valor, Conta conta, double tarifa) {
+        return executar(valor,conta,tarifa,Acao.SAQUE, conta.getIdUsuario());
+
+    }
+    public static Boolean executar(Double valor, Conta conta, double tarifa,Acao acao, String idDestino) {
         boolean sucesso = false;
         double valorTotalOperacao = valor;
 
@@ -47,11 +41,10 @@ public class Sacar implements br.gov.caixa.conta.interfaces.Sacar {
         if (sucesso){
             conta.setSaldo(conta.getSaldo() - valorTotalOperacao);
         }
-        conta.setHistorico(new HistoricoAcao(new Date(), Acao.SAQUE,
-                valor, valorTotalOperacao, "usuario", "usuario", "", sucesso));
+        conta.setHistorico(new HistoricoAcao(new Date(), acao,
+                valor, valorTotalOperacao, conta.getIdUsuario(), conta.getIdUsuario(), "", sucesso));
         return sucesso;
     }
-
 
 
 

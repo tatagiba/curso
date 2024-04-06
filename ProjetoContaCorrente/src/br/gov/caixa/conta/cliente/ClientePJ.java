@@ -2,6 +2,7 @@ package br.gov.caixa.conta.cliente;
 
 import br.gov.caixa.conta.conta.ContaInvestimento;
 import br.gov.caixa.conta.conta.pessoajuridica.ContaCorrentePJ;
+import br.gov.caixa.conta.conta.pessoajuridica.ContaInvestimentoPJ;
 import br.gov.caixa.conta.enumeradores.Status;
 import br.gov.caixa.conta.enumeradores.TipoCliente;
 import br.gov.caixa.conta.conta.ContaCorrente;
@@ -14,7 +15,7 @@ public final class ClientePJ extends Cliente{
         super(id, classificacao, nome, new Date(), Status.ATIVO);
 
         ContaCorrente contaPj = new ContaCorrentePJ("1", id);
-
+        ContaInvestimento investimentoPJ = new ContaInvestimentoPJ("1", id);
 
     }
 

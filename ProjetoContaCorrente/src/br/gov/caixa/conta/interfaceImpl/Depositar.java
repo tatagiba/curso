@@ -7,8 +7,8 @@ import br.gov.caixa.conta.historico.HistoricoAcao;
 import java.util.Date;
 
 public class Depositar implements br.gov.caixa.conta.interfaces.Depositar {
-    @Override
-    public Boolean executar(Double valor, Conta conta) {
+
+    public static Boolean executar(Double valor, Conta conta,Acao acao, String origem) {
         boolean sucesso;
         if (valor<0){
             sucesso = false;
@@ -17,8 +17,11 @@ public class Depositar implements br.gov.caixa.conta.interfaces.Depositar {
             sucesso = true;
         }
         conta.setHistorico(new HistoricoAcao(new Date(), Acao.DEPOSITO,
-                valor, valor,"usuario","usuario","",sucesso));
+                valor, valor,conta.getIdUsuario(),conta.getIdUsuario(),"",sucesso));
 
         return sucesso;
+    }
+    public Boolean executar(Double valor, Conta conta){
+        return executar(valor, conta,Acao.DEPOSITO,conta.getIdUsuario());
     }
 }
